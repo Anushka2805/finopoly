@@ -1,36 +1,153 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎲 Finopoly – A Gamified Financial Board Game
 
-## Getting Started
+Finopoly is a **Monopoly-inspired financial literacy board game** built for students and young adults.  
+The game transforms real-life money decisions—earning, saving, investing, loans, and insurance—into **fun, strategic gameplay**.
 
-First, run the development server:
+Players can compete **against another player or a computer AI**, learning financial concepts through cause-and-effect based turns.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Problem Statement
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Finance is often perceived as:
+- Boring
+- Complex
+- Intimidating for beginners
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Traditional learning methods fail to teach **practical money decision-making**.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 💡 Solution
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Finopoly simplifies finance by:
+- Turning money decisions into **game mechanics**
+- Using a **board-game format** familiar to users
+- Teaching concepts through **play, risk, and consequences**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🎮 Gameplay Overview
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 🎲 Dice-based board movement
+- 🧱 24-tile financial board
+- 👥 Single-player (vs Computer AI) or Local Multiplayer
+- 🔁 Turn-based system
+- 📈 Progressive difficulty
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Core Player Actions
+- Earn salary & bonuses
+- Save money in bank
+- Invest (FD, Stocks, Startups)
+- Take loans with interest
+- Buy insurance to reduce losses
+- Handle random events (market crash, emergencies)
+
+---
+
+## 🧠 Key Features
+
+### 💰 Financial Systems
+- Cash & savings management
+- Debt & interest system
+- Risk vs reward investments
+- Insurance-based loss reduction
+
+### 🎲 Board Mechanics
+- Salary tiles
+- Investment opportunities
+- Risk & emergency tiles
+- Bills & tax payments
+- Bonus & reward tiles
+
+### 🤖 AI Opponent
+- Easy / Medium / Hard difficulty
+- Rule-based financial decisions
+- Realistic money behavior simulation
+
+### 👥 Multiplayer Support
+- Local turn-based multiplayer
+- Shared board with player tokens
+
+### 🧮 Scoring & Analysis
+- Final financial score
+- Player personality detection:
+  - Saver
+  - Investor
+  - Risk Taker
+- Clear breakdown of decisions
+
+---
+
+## 🏗️ Tech Stack
+
+### Frontend
+- **Next.js (App Router)**
+- **TypeScript**
+- **Tailwind CSS**
+
+### Game Engine & Logic
+- Custom-built game engine
+- Modular financial systems
+- Turn manager & tile resolver
+- Rule-based AI system
+
+### Architecture
+- Logic separated from UI
+- Config-driven game balancing
+- Scalable and extensible design
+
+---
+
+---
+
+## ⚖️ Game Balancing
+
+All financial values (salary, bills, interest, risk) are controlled via a central **balance configuration file**, allowing:
+- Easy tuning
+- Fair gameplay
+- Difficulty scaling
+
+No hard-coded magic numbers are used.
+
+---
+
+## 🧪 Sample Playthrough (3 Turns)
+
+**Turn 1**  
+Player lands on Salary → Earns ₹500  
+→ Reinforces earning concept
+
+**Turn 2**  
+Player invests in a startup → High risk, high reward  
+→ Teaches investment risk
+
+**Turn 3**  
+Medical emergency occurs → Insurance reduces loss  
+→ Demonstrates importance of financial planning
+
+---
+
+## 🎯 Learning Outcomes
+
+Players learn:
+- Budgeting & cash flow management
+- Risk vs reward decision-making
+- Importance of savings & insurance
+- Long-term impact of debt
+
+All without traditional lectures.
+
+---
+
+## 🏆 Future Scope
+
+- Online multiplayer
+- Mobile app version
+- Institutional dashboards for colleges
+- Advanced AI difficulty
+- Multi-language support
+
+---
+###  Finopoly – Play. Decide. Learn Money.
+
