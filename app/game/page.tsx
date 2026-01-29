@@ -1,15 +1,12 @@
 "use client";
 
-export const dynamic = "error";
-
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 import Dice from "../components/Dice";
 import Board from "../components/Board";
 import EventModal from "../components/EventModal";
 import PlayerPanel from "../components/PlayerPanel";
-import BackgroundMusic from "../components/BackgroundMusic"; // 🔊 BG MUSIC
+import BackgroundMusic from "../components/BackgroundMusic";
 
 import { rollDice } from "../lib/dice";
 import {
@@ -47,10 +44,11 @@ function getEventDescription(tile: BoardTile, name: string): string {
   }
 }
 
-export default function GamePage() {
-  const params = useSearchParams();
-  const mode = (params.get("mode") as "single" | "multi") ?? "single";
-
+export default function GameClient({
+  mode,
+}: {
+  mode: "single" | "multi";
+}) {
   const [gameState, setGameState] = useState<GameState>(() => {
     const players = setupGame(mode);
     return {
@@ -77,8 +75,6 @@ export default function GamePage() {
     setDiceValue(dice);
 
     setGameState((prev) => {
-      if (!prev) return prev;
-
       const index = prev.currentPlayerIndex;
       const player = prev.players[index];
       const cashBefore = player.cash;
@@ -117,7 +113,6 @@ export default function GamePage() {
 
   return (
     <div className="min-h-screen p-6 space-y-6 bg-gray-50">
-      {/* 🔊 BACKGROUND MUSIC */}
       <BackgroundMusic />
 
       <h2 className="text-xl font-semibold text-center">
