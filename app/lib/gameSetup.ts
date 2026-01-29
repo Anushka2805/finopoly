@@ -17,3 +17,16 @@ export function createPlayer(
     isComputer,
   };
 }
+export function setupGame(mode: "single" | "multi"): Player[] {
+  if (mode === "single") {
+    return [
+      createPlayer(1, "Player 1"),
+      createPlayer(2, "Computer", true),
+    ];
+  }
+
+  return [
+    createPlayer(1, "Player 1"),
+    createPlayer(2, "Player 2"),
+  ];
+}

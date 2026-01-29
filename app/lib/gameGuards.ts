@@ -1,15 +1,32 @@
 import { Player } from "../types/player";
+import { BALANCE } from "../data/balanceConfig";
 
-export function enforceLimits(player: Player) {
-  let updated = { ...player };
+/**
+ * Enforces hard limits and safety rules on player state
+ */
+export function enforceLimits(player: Player): Player {
+  const updated = { ...player };
 
-  if (updated.debt > 2000) {
-    updated.cash -= 300;
+  // Max debt limit
+  if (updated.debt > BALANCE.LOAN.MAX_DEBT) {
+    updated.debt = BALANCE.LOAN.MAX_DEBT;
+    updated.cash -= BALANCE.PENALTIES.NEGATIVE_CASH;
   }
 
-  if (updated.cash < -500) {
+  // Bankruptcy handling
+  if (updated.cash < BALANCE.PENALTIES.BANKRUPTCY_LIMIT) {
     updated.cash = 0;
     updated.debt = 0;
+    updated.savings = 0;
+    updated.investments = {
+      fd: 0,
+      stocks: 0,
+      startup: 0,
+    };
+    updated.insurance = {
+      health: false,
+      market: false,
+    };
   }
 
   return updated;

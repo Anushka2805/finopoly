@@ -10,21 +10,19 @@ export const BALANCE = {
     HEAVY: 500,
   },
 
-  INVESTMENTS: {
-    FD_RETURN: 0.1,        // 10%
-    STOCK_RETURN: 0.2,     // 20%
-    STARTUP_RETURN: 0.5,   // 50%
-    STARTUP_RISK: 0.5,     // 50% chance of loss
+  INVESTMENT: {
+    FD_AMOUNT: 300,
+    FD_RETURN_RATE: 0.1, // 10%
   },
 
   LOAN: {
-    INTEREST_RATE: 0.05,   // 5% every 5 turns
+    INTEREST_RATE: 0.05, // 5% every 5 turns
     MAX_DEBT: 2000,
   },
 
   INSURANCE: {
-    HEALTH_REDUCTION: 0.6, // reduces loss by 60%
-    COST: 200,
+    HEALTH_COST: 200,
+    HEALTH_REDUCTION: 0.6, // 60% loss reduction
   },
 
   PENALTIES: {
