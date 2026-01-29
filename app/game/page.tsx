@@ -112,35 +112,63 @@ export default function GameClient({
   }
 
   return (
-    <div className="min-h-screen p-6 space-y-6 bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-slate-200 p-6">
       <BackgroundMusic />
 
-      <h2 className="text-xl font-semibold text-center">
-        Turn {gameState.turn} — {currentPlayer.name}
-      </h2>
-
-      <div className="flex gap-6 justify-center items-start">
-        <PlayerPanel player={gameState.players[0]} />
-        <Board players={gameState.players} />
-        <PlayerPanel player={gameState.players[1]} />
+      {/* Header */}
+      <div className="text-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-900">
+          Turn {gameState.turn}
+        </h2>
+        <p className="text-gray-600 mt-1">
+          Current Player:{" "}
+          <span className="font-semibold text-gray-800">
+            {currentPlayer.name}
+          </span>
+        </p>
       </div>
 
-      <div className="flex justify-center">
-        <Dice value={diceValue} onRoll={handleRollDice} />
+      {/* Game Area */}
+      <div className="flex flex-col lg:flex-row gap-6 justify-center items-start">
+        {/* Player 1 */}
+        <div className="bg-white rounded-2xl shadow-md p-4 w-full lg:w-64">
+          <PlayerPanel player={gameState.players[0]} />
+        </div>
+
+        {/* Board */}
+        <div className="bg-white rounded-3xl shadow-lg p-4">
+          <Board players={gameState.players} />
+        </div>
+
+        {/* Player 2 */}
+        <div className="bg-white rounded-2xl shadow-md p-4 w-full lg:w-64">
+          <PlayerPanel player={gameState.players[1]} />
+        </div>
       </div>
 
-      <div className="max-w-xl mx-auto bg-white rounded-xl p-4 shadow">
-        <h4 className="font-semibold mb-2">📜 Recent Activity</h4>
-        <ul className="text-sm space-y-1">
+      {/* Dice */}
+      <div className="flex justify-center mt-8">
+        <div className="bg-white rounded-2xl shadow-lg px-8 py-4">
+          <Dice value={diceValue} onRoll={handleRollDice} />
+        </div>
+      </div>
+
+      {/* Activity Log */}
+      <div className="max-w-xl mx-auto mt-8 bg-white rounded-2xl p-5 shadow-md">
+        <h4 className="font-semibold text-gray-900 mb-3">
+          📜 Recent Activity
+        </h4>
+        <ul className="text-sm space-y-1 text-gray-700">
           {history.length === 0 && (
             <li className="text-gray-400">No actions yet</li>
           )}
           {history.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>• {item}</li>
           ))}
         </ul>
       </div>
 
+      {/* Event Modal */}
       {event && (
         <EventModal
           title={event.title}
