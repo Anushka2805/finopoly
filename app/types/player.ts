@@ -15,4 +15,5 @@ export type Player = {
     startup: number;
   };
   isComputer: boolean;
+  token: string; // 👈 NEW
 };

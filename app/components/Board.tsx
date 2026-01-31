@@ -1,28 +1,26 @@
 import { board } from "../data/board";
 import { Player } from "../types/player";
-import Tile from "./Tile";
-import PlayerToken from "./PlayerToken";
 
-type Props = {
-  players: Player[];
-};
-
-export default function Board({ players }: Props) {
+export default function Board({ players }: { players: Player[] }) {
   return (
-    <div className="grid grid-cols-6 gap-2 bg-green-200 p-4 rounded-xl">
+    <div className="grid grid-cols-6 gap-3 bg-green-200 p-4 rounded-2xl">
       {board.map((tile, index) => (
-        <div key={tile.id} className="relative">
-          <Tile tile={tile} />
+        <div
+          key={index}
+          className="relative bg-white rounded-lg h-20 flex items-center justify-center text-sm"
+        >
+          {tile.label}
 
-          {players.map(
-            (player) =>
-              player.position === index && (
-                <PlayerToken
-                  key={player.id}
-                  player={player}
-                />
-              )
-          )}
+          {/* TOKENS */}
+          <div className="absolute bottom-1 right-1 flex gap-1">
+            {players
+              .filter((p) => p.position === index)
+              .map((p) => (
+                <span key={p.id} className="text-lg">
+                  {p.token}
+                </span>
+              ))}
+          </div>
         </div>
       ))}
     </div>
