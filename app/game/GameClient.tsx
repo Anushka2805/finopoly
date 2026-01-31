@@ -36,22 +36,14 @@ type GameEvent = {
 
 function getEventDescription(tile: BoardTile, name: string): string {
   switch (tile.type) {
-    case "salary":
-      return `${name} received salary`;
-    case "bonus":
-      return `${name} received a bonus`;
-    case "investment":
-      return `${name} invested money`;
-    case "bank":
-      return `${name} saved money in bank`;
-    case "insurance":
-      return `${name} bought insurance`;
-    case "risk":
-      return `${name} faced a financial risk`;
-    case "bills":
-      return `${name} paid a bill`;
-    default:
-      return `${name} encountered a financial event`;
+    case "salary": return `${name} received salary`;
+    case "bonus": return `${name} received a bonus`;
+    case "investment": return `${name} invested money`;
+    case "bank": return `${name} saved money in bank`;
+    case "insurance": return `${name} bought insurance`;
+    case "risk": return `${name} faced a financial risk`;
+    case "bills": return `${name} paid a bill`;
+    default: return `${name} encountered a financial event`;
   }
 }
 
@@ -63,6 +55,8 @@ export default function GameClient({
 }: {
   mode: "single" | "multi";
 }) {
+
+  /* ✅ State only created ONCE (key handles remount) */
   const [gameState, setGameState] = useState<GameState>(() => ({
     players: setupGame(mode),
     currentPlayerIndex: 0,
@@ -75,9 +69,9 @@ export default function GameClient({
   const currentPlayer = getCurrentPlayer(gameState);
 
 
-  /* =====================================================
-     MAIN TURN LOGIC (shared by player + computer)
-  ===================================================== */
+  /* ===================================================== */
+  /* TURN LOGIC */
+  /* ===================================================== */
 
   function playTurn() {
     const dice = rollDice();
@@ -113,26 +107,23 @@ export default function GameClient({
   }
 
 
-  /* =====================================================
-     HUMAN CLICK
-  ===================================================== */
+  /* ===================================================== */
+  /* HUMAN CLICK */
+  /* ===================================================== */
 
   function handleRollDice() {
-    if (currentPlayer.isComputer) return; // prevent manual click
+    if (currentPlayer.isComputer) return;
     playTurn();
   }
 
 
-  /* =====================================================
-     ⭐ AUTO COMPUTER TURN ⭐
-  ===================================================== */
+  /* ===================================================== */
+  /* COMPUTER AUTO PLAY (ONLY single mode) */
+  /* ===================================================== */
 
   useEffect(() => {
     if (mode === "single" && currentPlayer.isComputer) {
-      const timer = setTimeout(() => {
-        playTurn();
-      }, 900); // delay for realism
-
+      const timer = setTimeout(playTurn, 900);
       return () => clearTimeout(timer);
     }
   }, [currentPlayer, mode]);
@@ -144,40 +135,33 @@ export default function GameClient({
     <div className="min-h-screen bg-gradient-to-br from-gray-100 to-slate-200 p-6">
       <BackgroundMusic />
 
-      {/* Header */}
       <div className="text-center mb-6">
         <h2 className="text-2xl font-bold">
           Turn {gameState.turn} — {currentPlayer.name}
         </h2>
       </div>
 
-      {/* Layout */}
       <div className="flex flex-col lg:flex-row gap-6 justify-center items-start">
 
-        {/* Player 1 */}
         <div className="bg-white rounded-2xl shadow-xl p-4 w-64">
           <PlayerPanel player={gameState.players[0]} />
         </div>
 
-        {/* Board */}
         <div className="bg-white rounded-3xl shadow-2xl p-6">
           <Board players={gameState.players} />
         </div>
 
-        {/* Player 2 / Computer */}
         <div className="bg-white rounded-2xl shadow-xl p-4 w-64">
           <PlayerPanel player={gameState.players[1]} />
         </div>
       </div>
 
-      {/* Dice */}
       <div className="flex justify-center mt-8">
         <div className="bg-white rounded-2xl shadow-xl px-8 py-4">
           <Dice value={diceValue} onRoll={handleRollDice} />
         </div>
       </div>
 
-      {/* Event */}
       {event && (
         <EventModal
           title={event.title}

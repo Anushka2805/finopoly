@@ -2,13 +2,15 @@ import GameClient from "./GameClient";
 
 export const dynamic = "force-dynamic";
 
-export default function GamePage({
+export default async function GamePage({
   searchParams,
 }: {
-  searchParams: { mode?: string };
+  searchParams: Promise<{ mode?: string }>;
 }) {
-  const mode =
-    searchParams?.mode === "multi" ? "multi" : "single";
+  const params = await searchParams;
 
-  return <GameClient mode={mode} />;
+  const mode = params?.mode === "multi" ? "multi" : "single";
+
+  // ⭐ KEY FIX HERE
+  return <GameClient key={mode} mode={mode} />;
 }
